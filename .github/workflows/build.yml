@@ -37,7 +37,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # Install Chrome for PDF export (Marp uses headless Chrome)
       - name: Install Chrome
