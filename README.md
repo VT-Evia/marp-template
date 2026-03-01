@@ -63,9 +63,13 @@ In the left sidebar, expand the `presentations/` folder and click **vt-example.m
 
 ### Step 4 — Preview your slides
 
-Click the small **preview icon** in the top-right corner of the editor (it looks like a split screen), or open the Command Palette with `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) and type **Marp: Open Preview**.
+Click **Terminal → New Terminal** in the menu bar and run:
 
-You'll see your slides appear live on the right side of the screen as you edit the text on the left.
+```bash
+npm run preview
+```
+
+This builds your slides and opens them in a browser tab that updates automatically as you save changes.
 
 ---
 
@@ -129,10 +133,6 @@ Content the audience sees.
 ---
 
 ## Exporting Your Slides
-
-### From the VS Code preview (easiest)
-
-In the Marp preview panel, click the **export icon** (arrow pointing down) to save as HTML, PDF, or PowerPoint.
 
 ### From the terminal
 

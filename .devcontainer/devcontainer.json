@@ -5,15 +5,10 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "marp-team.marp-vscode",
         "yzhang.markdown-all-in-one",
         "bierner.markdown-preview-github-styles"
       ],
       "settings": {
-        "markdown.marp.enableHtml": true,
-        "markdown.marp.themes": [
-          "./themes/custom.css"
-        ],
         "editor.wordWrap": "on",
         "editor.rulers": [80],
         "[markdown]": {
