@@ -1,0 +1,28 @@
+{
+  "name": "Marp Presentations",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "marp-team.marp-vscode",
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-preview-github-styles"
+      ],
+      "settings": {
+        "markdown.marp.enableHtml": true,
+        "markdown.marp.themes": [
+          "./themes/custom.css"
+        ],
+        "editor.wordWrap": "on",
+        "editor.rulers": [80],
+        "[markdown]": {
+          "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+          "editor.formatOnSave": false
+        },
+        "markdown.preview.scrollEditorWithPreview": true,
+        "markdown.preview.scrollPreviewWithEditor": true
+      }
+    }
+  }
+}

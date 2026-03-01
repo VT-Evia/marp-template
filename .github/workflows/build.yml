@@ -1,0 +1,96 @@
+name: Build & Publish Presentations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'presentations/**'
+      - 'themes/**'
+      - '.marprc.yml'
+  pull_request:
+    paths:
+      - 'presentations/**'
+      - 'themes/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install Chrome for PDF export (Marp uses headless Chrome)
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Build HTML slides
+        run: npm run build
+
+      - name: Build PDF slides
+        run: npm run build:pdf
+
+      - name: Build PPTX slides
+        run: npm run build:pptx
+
+      - name: Generate index page
+        run: |
+          echo "<!DOCTYPE html><html><head><meta charset='utf-8'>
+          <title>Presentations</title>
+          <style>body{font-family:system-ui;max-width:800px;margin:3em auto;padding:0 1em}
+          h1{color:#861F41}a{color:#E5751F;font-size:1.1em}</style></head>
+          <body><h1>📊 Presentations</h1><ul>" > output/index.html
+          for f in output/*.html; do
+            name=$(basename "$f" .html)
+            [ "$name" = "index" ] && continue
+            echo "<li><a href='$name.html'>$name</a></li>" >> output/index.html
+          done
+          echo "</ul></body></html>" >> output/index.html
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: presentations
+          path: output/
+
+      # Deploy to GitHub Pages (only on push to main)
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/configure-pages@v4
+
+      - name: Upload to Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output/
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,6 @@
+# .marprc.yml — Marp CLI configuration
+# This file applies to all marp CLI commands run from the repo root.
+# Settings here are overridden by front-matter in individual .md files.
+
+html: true
+theme: themes/vt.css

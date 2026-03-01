@@ -1,0 +1,310 @@
+/* @theme vt */
+/*
+ * Virginia Tech Marp Theme
+ * Colors per VT Brand Center (brand.vt.edu/identity/color.html)
+ *
+ * Primary palette
+ *   Chicago Maroon  #861F41   PMS 209 C
+ *   Burnt Orange    #E5751F   PMS 159 C
+ *   Hokie Stone     #75787B   (neutral gray)
+ *   Yardline White  #FFFFFF
+ *
+ * Secondary accents (brand-approved)
+ *   Stone Dark      #4A4A4A
+ *   Maroon Dark     #5B0F2A
+ *   Orange Dark     #B35A12
+ *
+ * Typography: VT brand uses Acherus Grotesque (sans) + Crimson Text (serif).
+ * Both are not freely embeddable, so we fall back to system equivalents
+ * that match the geometric/old-style pairing. Swap the @import below
+ * if you have the licensed webfonts.
+ */
+
+@import 'default';
+
+/* ── Google Fonts fallback (closest open-source match) ───────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ── Brand tokens ────────────────────────────────────────────────────── */
+:root {
+  /* Primary */
+  --vt-maroon:        #861F41;
+  --vt-maroon-dark:   #5B0F2A;
+  --vt-orange:        #E5751F;
+  --vt-orange-dark:   #B35A12;
+
+  /* Neutrals */
+  --vt-stone:         #75787B;
+  --vt-stone-light:   #C0BFBF;
+  --vt-stone-pale:    #F2F0EF;
+  --vt-white:         #FFFFFF;
+  --vt-black:         #1A1A1A;
+
+  /* Semantic aliases */
+  --color-primary:    var(--vt-maroon);
+  --color-accent:     var(--vt-orange);
+  --color-neutral:    var(--vt-stone);
+  --color-bg:         var(--vt-white);
+  --color-text:       var(--vt-black);
+}
+
+/* ── Base slide ──────────────────────────────────────────────────────── */
+section {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 28px;
+  padding: 56px 72px;
+  /* Subtle Hokie Stone top bar */
+  border-top: 6px solid var(--vt-orange);
+}
+
+/* ── Headings ────────────────────────────────────────────────────────── */
+h1 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 700;
+  color: var(--vt-maroon);
+  font-size: 1.75em;
+  line-height: 1.15;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 3px solid var(--vt-orange);
+}
+
+h2 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 700;
+  color: var(--vt-maroon);
+  font-size: 1.3em;
+}
+
+h3 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500;
+  color: var(--vt-orange-dark);
+  font-size: 1.05em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────── */
+ul > li::marker {
+  color: var(--vt-orange);
+}
+
+ol > li::marker {
+  color: var(--vt-maroon);
+  font-weight: 700;
+}
+
+/* ── Strong / emphasis ───────────────────────────────────────────────── */
+strong {
+  color: var(--vt-maroon);
+}
+
+em {
+  color: var(--vt-orange-dark);
+  font-style: italic;
+}
+
+/* ── Blockquote ──────────────────────────────────────────────────────── */
+blockquote {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1.05em;
+  font-style: italic;
+  border-left: 5px solid var(--vt-orange);
+  padding: 0.3em 1em;
+  color: #444;
+  background: var(--vt-stone-pale);
+  border-radius: 0 6px 6px 0;
+  margin: 0.8em 0;
+}
+
+/* ── Code ────────────────────────────────────────────────────────────── */
+code {
+  font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  background: var(--vt-stone-pale);
+  border: 1px solid var(--vt-stone-light);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.82em;
+  color: var(--vt-maroon-dark);
+}
+
+pre {
+  background: #1e1a1c;   /* maroon-tinted dark */
+  border-radius: 8px;
+  padding: 1.1em 1.3em;
+  border-left: 4px solid var(--vt-orange);
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #f0e8ec;
+  font-size: 0.78em;
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82em;
+  margin-top: 0.5em;
+}
+
+th {
+  background-color: var(--vt-maroon);
+  color: var(--vt-white);
+  padding: 0.5em 1em;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+td {
+  padding: 0.4em 1em;
+  border-bottom: 1px solid var(--vt-stone-light);
+}
+
+tr:nth-child(even) td {
+  background: var(--vt-stone-pale);
+}
+
+tr:last-child td {
+  border-bottom: 2px solid var(--vt-maroon);
+}
+
+/* ── Links ───────────────────────────────────────────────────────────── */
+a {
+  color: var(--vt-orange-dark);
+  text-decoration: underline;
+}
+
+/* ── Pagination / footer ─────────────────────────────────────────────── */
+section::after {
+  font-size: 0.52em;
+  color: var(--vt-stone);
+}
+
+footer {
+  font-size: 0.52em;
+  color: var(--vt-stone);
+  border-top: 1px solid var(--vt-stone-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE CLASSES
+   Use with:  <!-- _class: className -->
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Title slide ─────────────────────────────────────────────────────── */
+/*
+   <!-- _class: title -->
+   Full-maroon cover slide. Put the event/date in a paragraph after h2.
+*/
+section.title {
+  background-color: var(--vt-maroon);
+  background-image:
+    /* Subtle diagonal stripe pattern for texture */
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.025) 40px,
+      rgba(255,255,255,0.025) 42px
+    );
+  color: var(--vt-white);
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 80px;
+}
+
+section.title h1 {
+  color: var(--vt-white);
+  border-bottom-color: var(--vt-orange);
+  font-size: 2em;
+  line-height: 1.1;
+}
+
+section.title h2 {
+  color: var(--vt-orange);
+  font-size: 1.1em;
+  font-weight: 400;
+  margin-top: 0.2em;
+}
+
+section.title p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.78em;
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+section.title strong {
+  color: var(--vt-orange);
+}
+
+/* ── Section break (orange) ──────────────────────────────────────────── */
+/*
+   <!-- _class: section -->
+   Burnt orange section-break slide.
+*/
+section.section {
+  background-color: var(--vt-orange);
+  color: var(--vt-white);
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.section h1,
+section.section h2 {
+  color: var(--vt-white);
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+section.section strong {
+  color: var(--vt-maroon);
+}
+
+/* ── Hokie Stone (neutral) ───────────────────────────────────────────── */
+/*
+   <!-- _class: stone -->
+   Muted, neutral "Hokie Stone" slide — good for intros or conclusions.
+*/
+section.stone {
+  background-color: var(--vt-stone-pale);
+  border-top-color: var(--vt-stone);
+}
+
+section.stone h1 {
+  color: var(--vt-maroon);
+  border-bottom-color: var(--vt-stone);
+}
+
+/* ── Two-column helper ───────────────────────────────────────────────── */
+/*
+   <!-- _class: cols -->
+   Then wrap content in two divs:
+   <div class="left">...</div>  <div class="right">...</div>
+*/
+section.cols {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+section.cols .left,
+section.cols .right {
+  /* used with HTML div blocks inside Marp */
+}
+
+/* ── Image-right layout ──────────────────────────────────────────────── */
+/*
+   Use Marp's built-in bg shorthand instead:
+   ![bg right:40%](image.png)
+*/
