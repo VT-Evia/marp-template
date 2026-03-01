@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Marp-based presentation template with Codespace support",
   "scripts": {
-    "build": "marp presentations/ --output output/",
-    "build:pdf": "marp presentations/ --output output/ --pdf --allow-local-files",
-    "build:pptx": "marp presentations/ --output output/ --pptx",
+    "build": "mkdir -p output && marp presentations/ --output output/",
+    "build:pdf": "mkdir -p output && marp presentations/ --output output/ --pdf --allow-local-files",
+    "build:pptx": "mkdir -p output && marp presentations/ --output output/ --pptx",
     "build:all": "npm run build && npm run build:pdf && npm run build:pptx",
     "watch": "marp presentations/ --watch --output output/",
     "preview": "marp presentations/ --preview --watch"
