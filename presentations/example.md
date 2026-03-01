@@ -119,8 +119,7 @@ Add notes in HTML comments — they don't appear on the slide:
 Content visible to the audience.
 
 <!-- Notes only you can see in presenter mode.
-     Open presenter view: press P in browser, or use the
-     Marp VS Code extension's "Open Presenter View" button. -->
+     Open presenter view: press P in the browser. -->
 ```
 
 <!-- 
