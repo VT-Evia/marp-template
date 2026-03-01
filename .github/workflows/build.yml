@@ -51,19 +51,51 @@ jobs:
       - name: Build PPTX slides
         run: npm run build:pptx
 
+      - name: List output directory (debug)
+        run: ls -la output/
+
       - name: Generate index page
         run: |
-          echo "<!DOCTYPE html><html><head><meta charset='utf-8'>
-          <title>Presentations</title>
-          <style>body{font-family:system-ui;max-width:800px;margin:3em auto;padding:0 1em}
-          h1{color:#861F41}a{color:#E5751F;font-size:1.1em}</style></head>
-          <body><h1>📊 Presentations</h1><ul>" > output/index.html
-          for f in output/*.html; do
-            name=$(basename "$f" .html)
-            [ "$name" = "index" ] && continue
-            echo "<li><a href='$name.html'>$name</a></li>" >> output/index.html
-          done
-          echo "</ul></body></html>" >> output/index.html
+          python3 << 'EOF'
+          import os
+
+          files = sorted([
+              f for f in os.listdir("output")
+              if f.endswith(".html") and f != "index.html"
+          ])
+
+          items = "\n".join(
+              f'<li><a href="{f}">{f.replace(".html", "").replace("-", " ").replace("_", " ").title()}</a></li>'
+              for f in files
+          )
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Presentations — Virginia Tech CLAHS</title>
+            <style>
+              body {{ font-family: system-ui, sans-serif; max-width: 700px; margin: 4em auto; padding: 0 1.5em; color: #1a1a1a; }}
+              h1 {{ color: #861F41; border-bottom: 3px solid #E5751F; padding-bottom: 0.3em; }}
+              ul {{ list-style: none; padding: 0; margin-top: 1.5em; }}
+              li {{ margin: 0.75em 0; }}
+              a {{ color: #E5751F; font-size: 1.1em; text-decoration: none; }}
+              a:hover {{ text-decoration: underline; }}
+              p.empty {{ color: #888; }}
+            </style>
+          </head>
+          <body>
+            <h1>📊 Presentations</h1>
+            {"<ul>" + items + "</ul>" if files else "<p class='empty'>No presentations found.</p>"}
+          </body>
+          </html>"""
+
+          with open("output/index.html", "w") as f:
+              f.write(html)
+
+          print(f"Index generated with {len(files)} presentation(s): {files}")
+          EOF
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

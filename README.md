@@ -1,138 +1,195 @@
-# Marp Presentation Template
+# Marp Presentation Template — Virginia Tech CLAHS
 
-A GitHub template repository for creating beautiful Markdown-based presentations with [Marp](https://marp.app/), pre-configured to run in GitHub Codespaces with the Marp VS Code extension.
+This repository lets you create **professional slide presentations by writing plain text**. Instead of clicking around in PowerPoint or Google Slides, you write your content in a simple format called Markdown, and the system turns it into a polished slide deck automatically.
 
----
+This might sound unusual at first, but it has real advantages for communicators:
 
-## ✨ Features
-
-- **Instant Codespace** — open this repo in a browser-based VS Code with Marp already installed
-- **Live preview** — see your slides update as you type via the Marp VS Code extension
-- **Custom theme** — a ready-to-customize CSS theme in `themes/custom.css`
-- **GitHub Actions** — automatically builds HTML, PDF, and PPTX on every push to `main`
-- **GitHub Pages** — published slides available as a live website after each push
+- Your content and your design are completely separate — change the look of every slide at once by editing one file
+- Your presentations live in the same place as your other course files and are version-controlled (you can always go back to an earlier draft)
+- You can export to HTML, PDF, or PowerPoint with a single command
 
 ---
 
-## 🚀 Quick Start
+## What Is Marp?
 
-### Option A: GitHub Codespace (recommended)
+**Marp** is a free, open-source tool that converts Markdown files into slide presentations. Markdown is the same plain-text formatting used in course management systems, GitHub, and many content platforms — if you've ever used `**bold**` or `# Heading` in a text editor, you already know the basics.
 
-1. Click **Use this template → Create a new repository**
-2. In your new repo, click **Code → Codespaces → Create codespace on main**
-3. Wait ~60 seconds for the container to build
-4. Open any `.md` file in `presentations/`
-5. Click the **preview icon** (top-right) or press `Ctrl+Shift+V` to open the Marp preview pane
-
-### Option B: Local development
-
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
-cd YOUR-REPO
-npm install
-```
-
-Then open in VS Code with the [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode) extension installed.
-
----
-
-## 📁 Repository Structure
+A Marp slide file looks like this:
 
 ```
-.
-├── .devcontainer/
-│   └── devcontainer.json      # Codespace config (extensions, settings)
-├── .github/
-│   └── workflows/
-│       └── build.yml          # Build + deploy GitHub Action
-├── presentations/
-│   └── example.md             # Start here — copy to make new decks
-├── themes/
-│   └── custom.css             # Your custom Marp theme
-├── output/                    # Built files (gitignored locally)
-├── .marprc.yml                # Marp CLI defaults
-└── package.json               # npm scripts
-```
-
----
-
-## 🖊️ Writing Slides
-
-Each `.md` file in `presentations/` is an independent deck. Start every file with:
-
-```markdown
 ---
 marp: true
-theme: custom
-paginate: true
-footer: "Your Name | Title | Date"
 ---
 
-# First Slide
+# My First Slide
+
+This is the content of slide one.
+
+---
+
+# My Second Slide
+
+- Bullet point one
+- Bullet point two
 ```
 
-Separate slides with `---`.
+Each `---` on its own line creates a new slide. That's really all there is to it.
 
-### Special slide classes
+---
 
-| Directive | Effect |
-|-----------|--------|
-| `<!-- _class: title -->` | Dark title slide |
-| `<!-- _class: accent -->` | Accent-colored section break |
-| `<!-- _backgroundColor: #hex -->` | Per-slide background |
-| `<!-- _color: white -->` | Per-slide text color |
+## Getting Started (No Installation Required)
+
+The easiest way to use this template is through **GitHub Codespaces** — a full coding environment that runs in your browser. You don't need to install anything on your computer.
+
+### Step 1 — Copy this template
+
+1. Click the green **Use this template** button at the top of this page
+2. Select **Create a new repository**
+3. Give your repository a name (e.g., `comm-4564-presentation`)
+4. Leave it set to **Public** and click **Create repository**
+
+### Step 2 — Open your Codespace
+
+1. In your new repository, click the green **Code** button
+2. Click the **Codespaces** tab
+3. Click **Create codespace on main**
+4. Wait about 60 seconds while the environment loads in your browser
+
+You'll see a VS Code editor open in your browser. This is where you'll write your slides.
+
+### Step 3 — Open the example presentation
+
+In the left sidebar, expand the `presentations/` folder and click **vt-example.md** to open it.
+
+### Step 4 — Preview your slides
+
+Click the small **preview icon** in the top-right corner of the editor (it looks like a split screen), or open the Command Palette with `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) and type **Marp: Open Preview**.
+
+You'll see your slides appear live on the right side of the screen as you edit the text on the left.
+
+---
+
+## Writing Your Presentation
+
+### Starting a new deck
+
+1. In the `presentations/` folder, right-click and choose **New File**
+2. Name it something like `my-presentation.md`
+3. Copy the front matter block from `vt-example.md` at the top:
+
+```
+---
+marp: true
+theme: vt
+paginate: true
+footer: "Your Name · Virginia Tech · Date"
+---
+```
+
+Everything after this block is your slide content.
+
+### Slide structure
+
+| What you type | What it does |
+|---------------|--------------|
+| `---` on its own line | Starts a new slide |
+| `# Heading` | Large slide title |
+| `## Subheading` | Smaller heading |
+| `- Item` | Bullet point |
+| `**bold text**` | Bold |
+| `*italic text*` | Italic |
+
+### Special slide types
+
+Add a comment directly above a slide's content to change its style:
+
+```
+<!-- _class: title -->
+# Cover Slide Title
+## Subtitle
+```
+
+```
+<!-- _class: section -->
+# Section Break
+```
 
 ### Speaker notes
 
-```markdown
-# Slide Title
+Anything inside `<!-- -->` comment tags won't appear on the slide but will be visible to you in presenter mode:
 
-Slide content here.
+```
+# My Slide
 
-<!-- Your speaker notes here. Press P in browser preview for presenter mode. -->
+Content the audience sees.
+
+<!-- Notes only I can see during the presentation. -->
 ```
 
 ---
 
-## 🏗️ Building Slides
+## Exporting Your Slides
 
-| Command | Output |
-|---------|--------|
-| `npm run build` | HTML files → `output/` |
-| `npm run build:pdf` | PDF files → `output/` |
-| `npm run build:pptx` | PPTX files → `output/` |
-| `npm run build:all` | All three formats |
-| `npm run watch` | Rebuild HTML on save |
-| `npm run preview` | Open browser preview with hot reload |
+### From the VS Code preview (easiest)
 
----
+In the Marp preview panel, click the **export icon** (arrow pointing down) to save as HTML, PDF, or PowerPoint.
 
-## 🎨 Customizing the Theme
+### From the terminal
 
-Edit `themes/custom.css`. The CSS variables at the top control the color palette:
+Click **Terminal → New Terminal** in the menu bar, then run:
 
-```css
-:root {
-  --color-primary:   #861F41;  /* Main brand color */
-  --color-secondary: #E5751F;  /* Accent color */
-}
+```bash
+npm run build        # creates HTML files
+npm run build:pdf    # creates PDF files
+npm run build:pptx   # creates PowerPoint files
 ```
 
-Register your theme in `.marprc.yml` and in the VS Code settings inside `.devcontainer/devcontainer.json` (already done).
+Your exported files will appear in the `output/` folder.
 
 ---
 
-## 🌐 GitHub Pages
+## Sharing Your Presentation Online
 
-After your first push to `main`, enable GitHub Pages:
+Every time you save changes and **commit** them to GitHub, the presentation is automatically built and published to a public web address. This means you can share a link to your slides without anyone needing to download a file.
 
-1. Go to **Settings → Pages**
-2. Set **Source** to **GitHub Actions**
+Your presentation will be available at:
+```
+https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+```
 
-Your presentations will be published at `https://YOUR-USERNAME.github.io/YOUR-REPO/`.
+To enable this the first time:
+1. Go to your repository on GitHub
+2. Click **Settings → Pages**
+3. Under **Source**, select **GitHub Actions**
+4. Click Save, then push any change to trigger the first build
 
 ---
 
-## 📄 License
+## Files in This Repository
 
-MIT — use freely, attribution appreciated.
+```
+marp-template/
+├── presentations/         ← Put your .md slide files here
+│   ├── example.md
+│   └── vt-example.md      ← Start here
+├── themes/
+│   └── vt.css             ← Virginia Tech color theme (don't edit unless you want to customize)
+├── .marprc.yml            ← Tells Marp which theme to use by default
+├── package.json           ← Lists the software this project needs
+└── README.md              ← This file
+```
+
+You'll spend almost all of your time inside the `presentations/` folder.
+
+---
+
+## Getting Help
+
+- **Marp documentation:** [marp.app](https://marp.app)
+- **Markdown reference:** [markdownguide.org/basic-syntax](https://www.markdownguide.org/basic-syntax/)
+- **GitHub Codespaces guide:** [docs.github.com/codespaces](https://docs.github.com/en/codespaces)
+
+If something isn't working, check that:
+1. Your file is saved (look for a dot next to the filename in the tab)
+2. The front matter block at the top includes `marp: true`
+3. Each slide is separated by `---` on its own line with a blank line before and after it
