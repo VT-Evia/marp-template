@@ -1,6 +1,5 @@
 {
   "name": "Marp Presentations",
-  "image": "mcr.microsoft.com/devcontainers/node:20",
   "postCreateCommand": "npm install",
   "customizations": {
     "vscode": {
