@@ -1,4 +1,4 @@
-# Marp Presentation Template — Virginia Tech CLAHS
+# Marp Presentation Template
 
 This repository lets you create **professional slide presentations by writing plain text**. Instead of clicking around in PowerPoint or Google Slides, you write your content in a simple format called Markdown, and the system turns it into a polished slide deck automatically.
 
