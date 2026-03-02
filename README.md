@@ -63,13 +63,13 @@ In the left sidebar, expand the `presentations/` folder and click **example.md**
 
 ### Step 4 — Preview your slides
 
-Click **Terminal → New Terminal** in the menu bar and run:
+With the **Marp for VS Code** extension installed automatically in your Codespace, you can see a live slide preview without using the terminal:
 
-```bash
-npm run preview
-```
+1. Open any `.md` file in `presentations/`
+2. Click the **preview icon** in the top-right corner of the editor (or press `Ctrl+Shift+V`)
+3. The preview panel updates automatically every time you save (`Ctrl+S`)
 
-This builds your slides and opens them in a browser tab that updates automatically as you save changes.
+> The preview renders your slides with the Virginia Tech theme exactly as they will appear when published.
 
 ---
 
