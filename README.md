@@ -6,7 +6,7 @@ This might sound unusual at first, but it has real advantages for communicators:
 
 - Your content and your design are completely separate — change the look of every slide at once by editing one file
 - Your presentations live in the same place as your other course files and are version-controlled (you can always go back to an earlier draft)
-- You can export to HTML, PDF, or PowerPoint with a single command
+- Output is generated automatically — push your changes to GitHub and the presentation is built and published for you
 
 ---
 
@@ -59,7 +59,7 @@ You'll see a VS Code editor open in your browser. This is where you'll write you
 
 ### Step 3 — Open the example presentation
 
-In the left sidebar, expand the `presentations/` folder and click **vt-example.md** to open it.
+In the left sidebar, expand the `presentations/` folder and click **example.md** to open it.
 
 ### Step 4 — Preview your slides
 
@@ -79,7 +79,7 @@ This builds your slides and opens them in a browser tab that updates automatical
 
 1. In the `presentations/` folder, right-click and choose **New File**
 2. Name it something like `my-presentation.md`
-3. Copy the front matter block from `vt-example.md` at the top:
+3. Copy the front matter block from `example.md` at the top:
 
 ```
 ---
@@ -130,21 +130,64 @@ Content the audience sees.
 <!-- Notes only I can see during the presentation. -->
 ```
 
----
+### Using Images
 
-## Exporting Your Slides
+#### Where to store your image files
 
-### From the terminal
+Put images in the `assets/` folder at the root of your repository. From any file inside `presentations/`, reference them with a relative path starting with `../assets/`:
 
-Click **Terminal → New Terminal** in the menu bar, then run:
-
-```bash
-npm run build        # creates HTML files
-npm run build:pdf    # creates PDF files
-npm run build:pptx   # creates PowerPoint files
+```
+marp-template/
+├── assets/
+│   ├── sample.png       ← drop your images here
+│   └── my-photo.jpg
+└── presentations/
+    └── example.md       ← reference as ../assets/my-photo.jpg
 ```
 
-Your exported files will appear in the `output/` folder.
+#### Inline image (inside slide content)
+
+Standard Markdown image syntax places the image within the slide's text area:
+
+```
+![A descriptive alt text](../assets/my-photo.jpg)
+```
+
+You can control the size with HTML attributes:
+
+```
+<img src="../assets/my-photo.jpg" alt="Description" width="400">
+```
+
+#### Full-bleed background image
+
+Place an image behind the entire slide by adding `bg` to the alt text:
+
+```
+![bg](../assets/my-photo.jpg)
+```
+
+Marp automatically scales and crops the image to fill the slide. The VT theme hides the maroon top-bar when a full background is used.
+
+#### Split background — image beside text
+
+Use `bg right` or `bg left` to fill half the slide with an image while keeping text on the other half. An optional percentage controls the split:
+
+```
+![bg right:45%](../assets/my-photo.jpg)
+
+# Slide Title
+
+Your text content goes here on the left side.
+```
+
+```
+![bg left:40%](../assets/my-photo.jpg)
+
+# Slide Title
+
+Your text content goes here on the right side.
+```
 
 ---
 
@@ -170,8 +213,9 @@ To enable this the first time:
 ```
 marp-template/
 ├── presentations/         ← Put your .md slide files here
-│   ├── example.md
-│   └── vt-example.md      ← Start here
+│   └── example.md         ← Start here
+├── assets/                ← Put your images here
+│   └── sample.png         ← Example image included with the template
 ├── themes/
 │   └── vt.css             ← Virginia Tech color theme (don't edit unless you want to customize)
 ├── .marprc.yml            ← Tells Marp which theme to use by default

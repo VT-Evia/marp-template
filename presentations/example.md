@@ -77,15 +77,31 @@ Use `<!-- _class: section -->` for a burnt orange section-break slide between ma
 
 ---
 
-# Background Image Slide
+![bg right:45%](../assets/sample.png)
 
-Marp handles image backgrounds natively — no extra CSS needed:
+# Image Beside Text
+
+Use `![bg right:45%]` to place an image on the right half of the slide, with your content on the left.
+
+- Store images in the `assets/` folder
+- Reference them as `../assets/filename.png`
+- Adjust the percentage to control the split
+
+<!-- Speaker note: The image is sample.png in the assets/ folder. Replace it with your own photo or diagram. -->
+
+---
+
+# Inline Image
+
+Use standard Markdown syntax to embed an image within the slide content:
 
 ```markdown
-![bg right:45%](../assets/your-image.jpg)
+![Alt text describing the image](../assets/sample.png)
 ```
 
-The VT theme's maroon top-bar is suppressed when using full-bleed backgrounds via `![bg](image.jpg)`.
+![Sample image](../assets/sample.png)
+
+<!-- Speaker note: The image above is placed inline using standard Markdown. Use an <img> tag with a width attribute if you need to control the size: <img src="../assets/sample.png" alt="Description" width="400"> -->
 
 ---
 
